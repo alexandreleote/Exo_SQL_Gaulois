@@ -52,3 +52,13 @@ INNER JOIN composer ON composer.id_ingredient = ingredient.id_ingredient
 INNER JOIN potion ON potion.id_potion = composer.id_potion
 WHERE potion.nom_potion = 'Santé'
 
+/* Exercice 8 */
+
+SELECT nom_personnage, prendre_casque.qte
+FROM personnage
+INNER JOIN prendre_casque ON prendre_casque.id_personnage = personnage.id_personnage
+INNER JOIN bataille ON prendre_casque.id_bataille = bataille.id_bataille
+WHERE bataille.nom_bataille = 'Bataille du village gaulois'
+ORDER BY prendre_casque.qte DESC;
+
+/* Exercice 9 */
