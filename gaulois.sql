@@ -140,3 +140,30 @@ WHERE id_personnage NOT IN (
 	INNER JOIN potion ON potion.id_potion = autoriser_boire.id_potion
 	WHERE potion.nom_potion = 'Magique'
 )
+
+/* Requêtes SQL */
+
+/* A */
+
+INSERT INTO personnage (nom_personnage, adresse_personnage, id_lieu, id_specialite)  
+VALUES ('Champbdeblix', 'à la ferme Hantassion', 6, 12)
+
+/* B */
+
+INSERT INTO autoriser_boire (id_potion, id_personnage)
+VALUES (1, 12)
+
+/* C */
+
+
+/* D */
+
+UPDATE personnage
+SET personnage.id_lieu = 9, personnage.adresse_personnage = 'En prison'
+WHERE personnage.nom_personnage = 'Zérozérosix'
+
+/* E */
+
+
+
+/* F */
