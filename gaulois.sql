@@ -155,6 +155,30 @@ VALUES (1, 12)
 
 /* C */
 
+DELETE FROM casque -- On définit la table dans laquelle on supprime un élément
+WHERE casque.id_casque IN ( -- On cible l'id de l'élément en question se trouvant DANS
+	SELECT casque.id_casque
+	FROM casque
+	LEFT JOIN prendre_casque ON prendre_casque.id_casque = id_casque -- Pour prendre en compte l'ensemble des casques n'ayant pas été pris et d'origine 'Grec'
+	WHERE casque.id_type_casque = (
+		SELECT id_type_casque
+		FROM type_casque
+		WHERE nom_type_casque = 'Grec'
+	) -- Fin de la sous-requête permettant de cibler l'élément voulu uniquement
+	AND prendre_casque.id_casque IS NULL
+)
+
+	/* Corrigé simplifié */
+DELETE FROM casque
+WHERE id_type_casque = ( -- On cible le type de casque ici Grec
+	SELECT id_type_casque
+	FROM type_casque
+	WHERE nom_type_casque = 'Grec'
+)
+AND id_casque NOT IN (
+	SELECT prendre_casque.id_casque
+	FROM prendre_casque
+)
 
 /* D */
 
@@ -164,6 +188,38 @@ WHERE personnage.nom_personnage = 'Zérozérosix'
 
 /* E */
 
+DELETE FROM composer -- On définit la table dans laquelle on retire une donnée (ligne ou colonne)
+WHERE id_potion = 9 -- On cherche l'id de la potion 'Soupe' ici 9
+AND id_ingredient = 19 -- On cible la ligne comportant l'id de l'ingrédient 'Persil' ici 19
 
+	/* Corrigé plus développé */
+DELETE FROM composer
+WHERE id_potion = (
+	SELECT id_potion
+	FROM potion
+	WHERE nom_potion = 'Soupe'
+)
+AND id_ingredient = (
+	SELECT id_ingredient
+	FROM ingredient
+	WHERE nom_ingredient = 'Persil'
+)
 
 /* F */
+
+UPDATE prendre_casque
+SET id_casque = (
+	SELECT casque.id_casque
+	FROM casque
+	WHERE casque.nom_casque = 'Weisenau'
+), qte = 42
+WHERE id_personnage = (
+	SELECT personnage.id_personnage
+	FROM personnage 
+	WHERE personnage.nom_personnage = 'Obélix'
+)
+AND id_bataille = (
+	SELECT bataille.id_bataille
+	FROM bataille
+	WHERE bataille.nom_bataille = 'Attaque de la banque postale'
+)
