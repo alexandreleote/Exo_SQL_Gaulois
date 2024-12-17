@@ -28,7 +28,7 @@ Vous êtes un développeur junior chargé de créer une base de données sur l'u
 Langages :
 
 -   SQL
--   MySQL ou MariaDB
+-   MySQL
 
 Concepts :
 
@@ -36,6 +36,10 @@ Concepts :
 -   Requêtes complexes
 -   Jointures
 -   Filtres et agrégations
+
+Outils :
+-   VSCode
+-   HeidiSQL
 
 ## 💡 Concepts clés abordés
 
